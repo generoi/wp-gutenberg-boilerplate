@@ -1,8 +1,18 @@
 const mix = require('laravel-mix');
+const glob = require('glob');
+const path = require('path');
 require('@tinypixelco/laravel-mix-wp-blocks');
 
-mix.sass('src/style.scss', 'dist')
-   .sass('src/editor.scss', 'dist');
+const buildPath = (file) => `${path.dirname(path.dirname(file))}/build`
 
- mix.js('src/index.js', 'dist')
-  .blocks('src/editor.js', 'dist');
+glob.sync('src/blocks/*/assets/index.js').forEach((file) => {
+  mix.blocks(file, buildPath(file));
+});
+
+glob.sync('src/blocks/*/assets/{index,style}.scss').forEach((file) => {
+  mix.sass(file, buildPath(file));
+});
+
+glob.sync('src/blocks/*/assets/block.json').forEach((file) => {
+  mix.copy(file, buildPath(file));
+});

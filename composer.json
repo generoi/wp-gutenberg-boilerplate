@@ -30,8 +30,6 @@
   "require": {
     "php": ">=7.0.0",
     "composer/installers": "~1.0",
-    "yahnis-elsts/plugin-update-checker": "^4.4",
-    "generoi/wp-genero-common": "^0.1.2",
     "illuminate/support": "^7.0||^8.0"
   },
   "require-dev": {
@@ -53,5 +51,10 @@
     "exclude": [
       ".gitignore"
     ]
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }
